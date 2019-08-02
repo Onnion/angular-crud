@@ -20,8 +20,9 @@ notifications:
     on_failure: always
 
 before_script:
-  - npm run install:clean
   - npm install -g @angular/cli
 
 script:
   - ng build --prod
+  - npm run test
+  - npm run lint
