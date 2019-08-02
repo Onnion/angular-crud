@@ -1,0 +1,25 @@
+.btn {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    vertical-align: middle;
+    color: #FFFFFF!important;
+}
+
+.line:hover {
+    background: #eaeaea;
+    cursor: pointer;
+}
+
+.form-control::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: #000000;
+    opacity: 1; /* Firefox */
+}
+
+.form-control:-ms-input-placeholder { /* Internet Explorer 10-11 */
+    color: #000000;
+}
+
+.form-control::-ms-input-placeholder { /* Microsoft Edge */
+    color: #000000;
+}

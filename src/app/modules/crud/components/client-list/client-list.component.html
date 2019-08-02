@@ -1,0 +1,89 @@
+<div class="container">
+  <div class="row mt-5 mb-5">
+    <div class="col-xl-12 mb-xl-0">
+      <div class="card shadow">
+        <div class="card-header border-0" style="position: sticky; top: 0; z-index: 999;">
+          <div class="row align-items-center">
+            <div class="col">
+              <h3 class="mb-0">Clientes</h3>
+            </div>
+          
+            <div class="col text-right">
+              <a [routerLink]="['/cadastrar']" class="btn btn-sm btn-slack">
+                <mat-icon matSuffix>person_add</mat-icon> <span style="margin-left: 3px"> Cadastrar Cliente </span>
+              </a>
+            </div>
+          </div>
+          <div class="row mt-3">
+            <div class="col">
+
+              <form class="navbar-search navbar-search-dark form-inline d-md-flex ml-lg-auto">
+                <div class="form-group mb-0" style="width: 100%">
+                  <div class="input-group input-group-alternative" style="width: 100%">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text">
+                        <mat-icon matSuffix>search</mat-icon>
+                      </span>
+                    </div>
+                    <input 
+                      (keyup)="handleFilter()" 
+                      (keydown)="handleFilter()"  
+                      [(ngModel)]="search"
+                      autofocus
+                      autocomplete="off"
+                      class="form-control" 
+                      placeholder="Buscar por nome ou CPF" 
+                      name="search" 
+                      type="text">
+                  </div>
+                </div>
+              </form>
+
+            </div>
+          </div>
+        </div>
+        <div class="table-responsive">
+          <table class="table align-items-center table-flush">
+            <thead class="thead-light">
+              <tr>
+                <th scope="col">Nome</th>
+                <th scope="col">Telefone</th>
+                <th scope="col">Email</th>
+                <th scope="col">Ações</th>
+              </tr>
+            </thead>
+            <tbody *ngIf="clientsAfterFiltred">
+              <tr *ngFor="let client of clientsAfterFiltred" class="line" [routerLink]="['/cliente', client.id]">
+                <th scope="row">
+                  {{client.name.split(' ')[0]}}
+                </th>
+                <td>
+                  {{client.phone}}
+                </td>
+                <td>
+                  {{client.email}}
+                </td>
+                <td>
+                  <button [routerLink]="['/editar', client.id]" class="btn-primary" mat-raised-button style="min-width: 0; padding: 2px; margin: 0px 5px;">
+                    <mat-icon matSuffix>edit</mat-icon>
+                  </button>
+                  <button (click)="selectDelete($event, client)" class="btn-warning" mat-raised-button style="min-width: 0; padding: 2px; margin: 0px 5px;">
+                    <mat-icon matSuffix>delete_forever</mat-icon>
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+
+            <tbody *ngIf="!clientsAfterFiltred || clientsAfterFiltred.length <= 0">
+              <tr>
+                <td colspan="4" style="text-align: center">NENHUM CLIENTE CADASTRADO</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-confirm *ngIf="client" (cancel)="cancel()" (done)="delete()" [client]="client"></app-confirm>

@@ -1,0 +1,93 @@
+<div class="container">
+  <div class="row mt-5 mb-5">
+    <div class="col-xl-12 order-xl-1">
+      <div class="card bg-secondary shadow">
+        <div class="card-header bg-white border-0" style="position: sticky; top: 0; z-index: 999;">
+          <div class="row align-items-center">
+            <div class="col-6">
+              <h3 class="mb-0">Novo Cliente</h3>
+            </div>
+            <div class="col-6 text-right">
+              <button [routerLink]="['/']" type="button" class="btn btn-sm btn-outline-default">Cancelar</button>
+              <a (click)="forceSubmit()" class="btn btn-sm btn-slack" style="color: #FFFFFF">Salvar</a>
+
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <form [formGroup]="form" (submit)="set()">
+
+            <h6 class="heading-small text-muted mb-4">Informações do Cliente</h6>
+            <div class="pl-lg-4">
+              <div class="row">
+                <div class="col-lg-8">
+                  <div class="form-group">
+                    <!-- <label class="form-control-label" for="input-username">Username</label>
+                          <input type="text" id="input-username" class="form-control form-control-alternative" placeholder="Username"
+                            value="lucky.jesse"> -->
+                    <mat-form-field appearance="outline">
+                      <mat-label>Nome Completo</mat-label>
+                      <input formControlName="name" matInput>
+                      <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+                    </mat-form-field>
+                  </div>
+                </div>
+                <div class="col-lg-4">
+                  <div class="form-group">
+                    <mat-form-field appearance="outline">
+                      <mat-label>Idade</mat-label>
+                      <input formControlName="age" id="age" matInput>
+
+                      <mat-icon matSuffix>date_range</mat-icon>
+                    </mat-form-field>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-lg-4">
+                  <div class="form-group">
+                    <mat-form-field appearance="outline">
+                      <mat-label>Telefone</mat-label>
+                      <input formControlName="phone" matInput>
+
+                      <mat-icon matSuffix>phone</mat-icon>
+                    </mat-form-field>
+                  </div>
+                </div>
+                <div class="col-lg-4">
+                  <div class="form-group">
+
+                    <mat-form-field appearance="outline">
+                      <mat-label>CPF</mat-label>
+                      <input formControlName="cpf" matInput>
+
+                      <mat-icon matSuffix>assignment_ind</mat-icon>
+                    </mat-form-field>
+                  </div>
+                </div>
+
+                <div class="col-lg-4">
+                  <div class="form-group">
+
+                    <mat-form-field appearance="outline">
+                      <mat-label>Email</mat-label>
+                      <input formControlName="email" matInput>
+                      <mat-icon matSuffix>mail_outline</mat-icon>
+                    </mat-form-field>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="text-center">
+              <button type="submit" id="submit" class="btn btn-slack">Salvar Cliente</button>
+            </div>
+
+          </form>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</div>

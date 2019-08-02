@@ -1,0 +1,56 @@
+<div class="container">
+  <div class="row justify-content-center mt-7 mb-5">
+    <div class="col-md-6 col-xs-8 mb-xl-0">
+      <div class="card card-profile shadow">
+        <div class="row justify-content-center">
+          <div class="col-lg-3 order-lg-2">
+            <div class="card-profile-image">
+              <a title="Em Breve">
+                <img src="http://via.placeholder.com/800x800" class="rounded-circle">
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="card-header text-center border-0 pt-8 pt-md-4 pb-0 pb-md-4">
+          <div class="d-flex justify-content-between">
+            <a [routerLink]="['/editar', client.id]" class="btn btn-sm btn-primary float-right">Editar</a>
+          </div>
+        </div>
+        <div class="card-body pt-0 pt-md-4">
+          <div class="row">
+            <div class="col">
+              <div class="card-profile-stats d-flex justify-content-center mt-md-5">
+
+              </div>
+            </div>
+          </div>
+          <div class="text-center">
+            <h3>{{client.name}}<span class="font-weight-light">, {{client.age}} {{client.age > '1' ? 'anos' : 'ano'}}</span>
+            </h3>
+            <!-- <div class="h5">
+              {{client.email}}
+            </div> -->
+            <div class="h5 mt-4">
+              {{client.phone}}
+            </div>
+            <div class="h5">
+              {{client.cpf}}
+            </div>
+
+            <hr class="my-4" />
+
+            <div class="row" style="margin: 20px auto;">
+                <div class="col text-center">
+                  <button type="button" mat-stroked-button [routerLink]="['/']">Voltar</button>
+                </div>
+              </div>
+
+            <!-- <p>Ryan — the name taken by Melbourne-raised, Brooklyn-based Nick Murphy — writes, performs and records all
+              of his own music.</p>
+            <a href="#">Show more</a> -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,38 @@
+<div modal>
+  <div class="container">
+    <div class="row" style="justify-content: center; display: flex; min-height: 250px;">
+      <div class="col-md-6">
+        <mat-card>
+          <!-- <app-loading [loading]=loading></app-loading> -->
+          <div class="row">
+            <div class="col-md-12">
+              <h3 style="margin: 20px auto;">Você tem certeza que deseja excluir esse cliente?</h3>
+              <h5>Confirme sua decisão digitando o cpf do cliente</h5>
+            </div>
+          </div>
+
+          <form [formGroup]="form" (submit)="submit()">
+
+            <div class="form-group">
+              <mat-form-field appearance="outline">
+                <mat-label>CPF</mat-label>
+                <input formControlName="cpf" id="age" matInput>
+
+                <mat-icon matSuffix>assignment_ind</mat-icon>
+              </mat-form-field>
+            </div>
+
+            <div class="row" style="margin: 20px auto;">
+              <div class="col text-center">
+                <button type="button" mat-stroked-button (click)="cancelDelete()">cancelar</button>
+              </div>
+              <div class="col text-center">
+                <button [disabled]="!form.valid" type="submit" mat-raised-button color="warn">Excluir</button>
+              </div>
+            </div>
+          </form>
+        </mat-card>
+      </div>
+    </div>
+  </div>
+</div>
