@@ -1,5 +1,5 @@
 import * as moment from 'moment';
-import { Vehicle } from '../vehicle/vehicle.model';
+// import { Vehicle } from '../vehicle/vehicle.model';
 
 export interface Client {
     id?: string;
@@ -8,5 +8,5 @@ export interface Client {
     cpf: string;
     phone: string;
     birthdate: moment.Moment;
-    vehicle: Vehicle;
+    // vehicle: Vehicle;
 }
