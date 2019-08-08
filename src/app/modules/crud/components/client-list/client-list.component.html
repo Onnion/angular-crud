@@ -5,12 +5,13 @@
         <div class="card-header border-0" style="position: sticky; top: 0; z-index: 999;">
           <div class="row align-items-center">
             <div class="col">
-              <h3 class="mb-0">Clientes</h3>
+              <h3 class="mb-0">{{ 'list.title' | translate }}</h3>
             </div>
-          
+
             <div class="col text-right">
               <a [routerLink]="['/cadastrar']" class="btn btn-sm btn-slack">
-                <mat-icon matSuffix>person_add</mat-icon> <span style="margin-left: 3px"> Cadastrar Cliente </span>
+                <mat-icon matSuffix>person_add</mat-icon> <span style="margin-left: 3px">
+                  {{ 'actions.register' | translate }} </span>
               </a>
             </div>
           </div>
@@ -25,15 +26,8 @@
                         <mat-icon matSuffix>search</mat-icon>
                       </span>
                     </div>
-                    <input 
-                      (keyup)="handleFilter()" 
-                      (keydown)="handleFilter()"  
-                      [(ngModel)]="search"
-                      autofocus
-                      autocomplete="off"
-                      class="form-control" 
-                      placeholder="Buscar por nome ou CPF" 
-                      name="search" 
+                    <input (keyup)="handleFilter()" (keydown)="handleFilter()" [(ngModel)]="search" autofocus
+                      autocomplete="off" class="form-control" placeholder="Buscar por nome ou CPF" name="search"
                       type="text">
                   </div>
                 </div>
@@ -46,10 +40,10 @@
           <table class="table align-items-center table-flush">
             <thead class="thead-light">
               <tr>
-                <th scope="col">Nome</th>
-                <th scope="col">Telefone</th>
-                <th scope="col">Email</th>
-                <th scope="col">Ações</th>
+                <th scope="col">{{ 'list.thead.name' | translate }}</th>
+                <th scope="col">{{ 'list.thead.phone' | translate }}</th>
+                <th scope="col">{{ 'list.thead.email' | translate }}</th>
+                <th scope="col">{{ 'list.thead.actions' | translate }}</th>
               </tr>
             </thead>
             <tbody *ngIf="clientsAfterFiltred">
@@ -60,14 +54,16 @@
                 <td>
                   {{client.phone}}
                 </td>
-                <td>
+                <!-- <td>
                   {{client.email}}
-                </td>
+                </td> -->
                 <td>
-                  <button [routerLink]="['/editar', client.id]" class="btn-primary" mat-raised-button style="min-width: 0; padding: 2px; margin: 0px 5px;">
+                  <button [routerLink]="['/editar', client.id]" class="btn-primary" mat-raised-button
+                    style="min-width: 0; padding: 2px; margin: 0px 5px;">
                     <mat-icon matSuffix>edit</mat-icon>
                   </button>
-                  <button (click)="selectDelete($event, client)" class="btn-warning" mat-raised-button style="min-width: 0; padding: 2px; margin: 0px 5px;">
+                  <button (click)="selectDelete($event, client)" class="btn-warning" mat-raised-button
+                    style="min-width: 0; padding: 2px; margin: 0px 5px;">
                     <mat-icon matSuffix>delete_forever</mat-icon>
                   </button>
                 </td>
@@ -76,7 +72,7 @@
 
             <tbody *ngIf="!clientsAfterFiltred || clientsAfterFiltred.length <= 0">
               <tr>
-                <td colspan="4" style="text-align: center">NENHUM CLIENTE CADASTRADO</td>
+                <td colspan="4" style="text-align: center; text-transform: uppercase">{{ 'list.fallback' | translate }}</td>
               </tr>
             </tbody>
           </table>

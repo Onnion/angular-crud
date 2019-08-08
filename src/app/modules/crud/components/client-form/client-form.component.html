@@ -18,25 +18,23 @@
           <form [formGroup]="form" (submit)="set()">
 
             <h6 class="heading-small text-muted mb-4">Informações do Cliente</h6>
-            <div class="pl-lg-4">
+            <div>
               <div class="row">
                 <div class="col-lg-8">
                   <div class="form-group">
-                    <!-- <label class="form-control-label" for="input-username">Username</label>
-                          <input type="text" id="input-username" class="form-control form-control-alternative" placeholder="Username"
-                            value="lucky.jesse"> -->
                     <mat-form-field appearance="outline">
                       <mat-label>Nome Completo</mat-label>
-                      <input formControlName="name" matInput>
+                      <input formControlName="name" placeholder="Marcio Henrique" matInput>
                       <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
                     </mat-form-field>
                   </div>
                 </div>
+
                 <div class="col-lg-4">
                   <div class="form-group">
                     <mat-form-field appearance="outline">
-                      <mat-label>Idade</mat-label>
-                      <input formControlName="age" id="age" matInput>
+                      <mat-label>Data de Nascimento</mat-label>
+                      <input mask="BIRTHDATE" formControlName="birthdate" id="age" placeholder="26/03/1996" matInput>
 
                       <mat-icon matSuffix>date_range</mat-icon>
                     </mat-form-field>
@@ -44,24 +42,115 @@
                 </div>
               </div>
               <div class="row">
-                <div class="col-lg-4">
+                <div class="col-lg-6">
                   <div class="form-group">
                     <mat-form-field appearance="outline">
                       <mat-label>Telefone</mat-label>
-                      <input formControlName="phone" matInput>
+                      <input mask="PHONE" formControlName="phone" placeholder="(81) 99833-4195" matInput>
 
                       <mat-icon matSuffix>phone</mat-icon>
                     </mat-form-field>
                   </div>
                 </div>
-                <div class="col-lg-4">
+                <div class="col-lg-6">
                   <div class="form-group">
 
                     <mat-form-field appearance="outline">
                       <mat-label>CPF</mat-label>
-                      <input formControlName="cpf" matInput>
+                      <input mask="CPF" formControlName="cpf" placeholder="000.000.000-01" matInput>
 
                       <mat-icon matSuffix>assignment_ind</mat-icon>
+                    </mat-form-field>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- @TODO COMPONENT -->
+            <h6 class="heading-small text-muted mb-4">Informações de Endereço</h6>
+            <div>
+              <div class="row">
+
+                <div class="col-lg-6">
+                  <div class="form-group">
+                    <mat-form-field class="example-full-width" appearance="outline">
+                      <mat-label>Veículo</mat-label>
+                      <input matInput autofocus placeholder="Corola" formControlName="vehicle"
+                        [matAutocomplete]="auto" />
+                      <mat-autocomplete #auto="matAutocomplete">
+                        <mat-option (click)="selectVehicle(vehicle)"
+                          *ngFor="let vehicle of (filteredBrands | async)" [value]="vehicle.brand">
+                          <!-- <img *ngIf="vehicle.picture" class="example-option-img" aria-hidden [src]="vehicle.picture"
+                            height="25" style="margin-right: 5px; max-width: 35%;" /> -->
+                          <span>{{ vehicle.brand }}</span>
+                        </mat-option>
+                      </mat-autocomplete>
+                    </mat-form-field>
+                  </div>
+                </div>
+
+                <div class="col-lg-6">
+                    <div class="form-group">
+                      <mat-form-field class="example-full-width" appearance="outline">
+                        <mat-label>Veículo</mat-label>
+                        <input matInput autofocus placeholder="Corola" formControlName="vehicle"
+                          [matAutocomplete]="auto" />
+                        <mat-autocomplete #auto="matAutocomplete">
+                          <mat-option (click)="selectVehicle(vehicle)"
+                            *ngFor="let vehicle of (filteredVehicles | async)" [value]="vehicle.model">
+                            <!-- <img *ngIf="vehicle.picture" class="example-option-img" aria-hidden [src]="vehicle.picture"
+                              height="25" style="margin-right: 5px; max-width: 35%;" /> -->
+                            <span>{{ vehicle.model }}</span>
+                          </mat-option>
+                        </mat-autocomplete>
+                      </mat-form-field>
+                    </div>
+                  </div>
+              </div>
+            </div>
+
+            <!-- @TODO COMPONENT -->
+            <h6 class="heading-small text-muted mb-4">Informações de Endereço</h6>
+            <div formGroupName="address">
+              <div class="row">
+
+                <div class="col-lg-4">
+                  <div class="form-group">
+                    <mat-form-field appearance="outline">
+                      <mat-label>CEP</mat-label>
+                      <input mask="CEP" formControlName="cep" (keyup)="getCep()" placeholder="00000-001" matInput>
+                      <mat-icon matSuffix>explore</mat-icon>
+                    </mat-form-field>
+                  </div>
+                </div>
+
+                <div class="col-lg-4">
+                  <div class="form-group">
+                    <mat-form-field appearance="outline">
+                      <mat-label>Endereço</mat-label>
+                      <input formControlName="logradouro" placeholder="Av. Brasil, 274" matInput>
+                      <mat-icon matSuffix>person_pin_circle</mat-icon>
+                    </mat-form-field>
+                  </div>
+                </div>
+
+                <div class="col-lg-4">
+                  <div class="form-group">
+                    <mat-form-field appearance="outline">
+                      <mat-label>Complemento</mat-label>
+                      <input formControlName="complemento" placeholder="Apartamento 201" matInput>
+                    </mat-form-field>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+
+                <div class="col-lg-4">
+                  <div class="form-group">
+
+                    <mat-form-field appearance="outline">
+                      <mat-label>Bairo</mat-label>
+                      <input formControlName="bairro" placeholder="São Paulo" matInput>
                     </mat-form-field>
                   </div>
                 </div>
@@ -70,9 +159,18 @@
                   <div class="form-group">
 
                     <mat-form-field appearance="outline">
-                      <mat-label>Email</mat-label>
-                      <input formControlName="email" matInput>
-                      <mat-icon matSuffix>mail_outline</mat-icon>
+                      <mat-label>Cidade</mat-label>
+                      <input formControlName="localidade" placeholder="São Paulo" matInput>
+                    </mat-form-field>
+                  </div>
+                </div>
+
+                <div class="col-lg-4">
+                  <div class="form-group">
+
+                    <mat-form-field appearance="outline">
+                      <mat-label>Estado</mat-label>
+                      <input formControlName="uf" placeholder="SP" matInput>
                     </mat-form-field>
                   </div>
                 </div>

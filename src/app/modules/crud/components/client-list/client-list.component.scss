@@ -11,15 +11,19 @@
     cursor: pointer;
 }
 
+.form-control {
+    color: #32325d;
+}
+
 .form-control::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
-    color: #000000;
+    color: #32325d;
     opacity: 1; /* Firefox */
 }
 
 .form-control:-ms-input-placeholder { /* Internet Explorer 10-11 */
-    color: #000000;
+    color: #32325d;
 }
 
 .form-control::-ms-input-placeholder { /* Microsoft Edge */
-    color: #000000;
+    color: #32325d;
 }

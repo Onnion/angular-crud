@@ -1,0 +1,12 @@
+.nav-header {
+  height: 80px;
+  background: #fff;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  flex-direction: row;
+  padding: 0px 80px;
+  -webkit-box-shadow: 0px 3px 13px -7px #000000,
+    5px 5px 15px 5px rgba(0, 0, 0, 0);
+  box-shadow: 0px 3px 13px -7px #000000, 5px 5px 15px 5px rgba(0, 0, 0, 0);
+}

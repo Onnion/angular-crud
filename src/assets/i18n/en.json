@@ -1,0 +1,15 @@
+{
+  "actions": {
+    "register": "Register Client"
+  },
+  "list": {
+    "title": "Clients",
+    "thead": {
+      "name": "name",
+      "phone": "Phone",
+      "email": "Email",
+      "actions": "Actions"
+    },
+    "fallback": "no registered clients"
+  }
+}

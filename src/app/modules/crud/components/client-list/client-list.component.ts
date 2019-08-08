@@ -8,15 +8,15 @@ import { clean } from '../../../common/utils/mask.utils';
 @Component({
   selector: 'app-client-list',
   templateUrl: './client-list.component.html',
-  styleUrls: ['./client-list.component.css'],
+  styleUrls: ['./client-list.component.scss'],
   animations: [listObjShow]
 })
 export class ClientListComponent implements OnInit {
 
   public client: Client;
 
-  private clientsBeforeFiltred;
-  public clientsAfterFiltred;
+  private clientsBeforeFiltred: Client[];
+  public clientsAfterFiltred: Client[];
   public search: string;
 
   @Input() clients: Client[];
