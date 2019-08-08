@@ -6,7 +6,7 @@ import { DataPersistenceService } from '../../services/data-persistence/data-per
 @Component({
   selector: 'app-client-view',
   templateUrl: './client-view.component.html',
-  styleUrls: ['./client-view.component.css']
+  styleUrls: ['./client-view.component.scss']
 })
 export class ClientViewComponent implements OnInit {
   public client: Client;

@@ -9,7 +9,6 @@ import { ConfirmComponent } from './components/confirm/confirm.component';
 import { DataPersistenceService } from './services/data-persistence/data-persistence.service';
 import { FormBuilderValidators } from '../common/validators/form-builder/form-builder.validators';
 import { MatButtonModule, MatCardModule, MatIconModule, MatInputModule, MatAutocompleteModule } from '@angular/material';
-import { TranslateModule } from '@ngx-translate/core';
 import { CepService } from './services/cep/cep.service';
 import { MaskDirective } from './directives/mask/mask.directive';
 import { ModalDirective } from './directives/modal/modal.directive';
@@ -34,8 +33,7 @@ import { ModalDirective } from './directives/modal/modal.directive';
     MatInputModule,
     MatButtonModule,
     MatIconModule,
-    MatCardModule,
-    TranslateModule.forChild()
+    MatCardModule
   ]
 })
 export class CrudModule { }

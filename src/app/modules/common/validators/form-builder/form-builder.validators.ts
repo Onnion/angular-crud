@@ -5,22 +5,29 @@ import { validEmail, validName } from '../regex/regex.validator';
 
 @Injectable()
 export class FormBuilderValidators {
+  private validEmail;
+  private validName;
+  private validCpf;
 
-  constructor() { }
+  constructor() {
+    this.validEmail = validEmail;
+    this.validName = validName;
+    this.validCpf = validCpf;
+  }
+
+  private setError(control: FormControl, error: string): { [key: string]: boolean } {
+    return this[error](control.value) ? null : { [error]: true };
+  }
 
   public emailFormat(control: FormControl): { [key: string]: boolean } {
-    return validEmail(control.value) ? null : { emailFormat: true };
+    return this.setError(control, 'validEmail');
   }
 
   public nameFormat(control: FormControl): { [key: string]: boolean } {
-    return validName(control.value) ? null : { nameFormat: true };
+    return this.setError(control, 'validName');
   }
 
   public cpfFormat(control: FormControl): { [key: string]: boolean } {
-    return validCpf(control.value) ? null : { cpfFormat: true };
-  }
-
-  public ageFormat(control: FormControl): { [key: string]: boolean } {
-    return (control.value.length <= 3 && control.value <= 125) ? null : { ageFormat: true };
+    return this.setError(control, 'validCpf');
   }
 }

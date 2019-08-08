@@ -5,7 +5,6 @@ import { Address } from '../../models/address/addres.model';
 import { DataPersistenceService } from '../../services/data-persistence/data-persistence.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilderValidators } from 'src/app/modules/common/validators/form-builder/form-builder.validators';
-import { NotifyService } from 'src/app/modules/common/services/notify/notify.service';
 import { CepService } from '../../services/cep/cep.service';
 import { Vehicle } from '../../models/vehicle/vehicle.model';
 import { Observable } from 'rxjs';
@@ -38,13 +37,27 @@ export class ClientFormComponent implements OnInit {
     private cepService: CepService
   ) { }
 
-  private initFormControls(): void {
+  private addressControls(): object {
+    const { address } = this.client;
+    return {
+      cep: [this.client ? address.cep : '', [Validators.required, Validators.pattern('^[0-9]{5}-[0-9]{3}$')]],
+      logradouro: [{ value: this.client ? address.logradouro : '', disabled: true }, [Validators.required]],
+      complemento: [this.client ? address.complemento : '', []],
+      bairro: [{ value: this.client ? address.bairro : '', disabled: true }, [Validators.required]],
+      localidade: [{ value: this.client ? address.localidade : '', disabled: true }, [Validators.required]],
+      uf: [{ value: this.client ? address.uf : '', disabled: true }, [Validators.required]],
+    };
+  }
 
+  private checkEdit(): void {
     if (this.type === 'edit') {
       const { id } = this.active.snapshot.params;
       this.client = this.dataPersistence.get('client', id);
     }
+  }
 
+  private initFormControls(): void {
+    this.checkEdit();
     this.form = this.fb.group({
       name: [this.client ? this.client.name : '', [Validators.required, this.custonValidators.nameFormat]],
       cpf: [this.client ? this.client.cpf : '', [
@@ -58,16 +71,8 @@ export class ClientFormComponent implements OnInit {
         Validators.pattern('^[0-9]{2}[\/][0-9]{2}[\/][0-9]{4}$')
       ]],
       vehicle: ['', [Validators.required]],
-      address: this.fb.group({
-        cep: [this.client ? this.client.address.cep : '', [Validators.required, Validators.pattern('^[0-9]{5}-[0-9]{3}$')]],
-        logradouro: [{ value: this.client ? this.client.address.logradouro : '', disabled: true }, [Validators.required]],
-        complemento: [this.client ? this.client.address.complemento : '', []],
-        bairro: [{ value: this.client ? this.client.address.bairro : '', disabled: true }, [Validators.required]],
-        localidade: [{ value: this.client ? this.client.address.localidade : '', disabled: true }, [Validators.required]],
-        uf: [{ value: this.client ? this.client.address.uf : '', disabled: true }, [Validators.required]],
-      })
+      address: this.fb.group(this.addressControls())
     });
-
   }
 
   private createData($data: Client): Client {
@@ -94,7 +99,6 @@ export class ClientFormComponent implements OnInit {
       const data = this.createData(this.form.value);
 
       this.dataPersistence[this.type === 'edit' ? 'update' : 'create']('client', data);
-      // this.notify.show('success', `Cliente ${this.type === 'edit' ? 'atualizado' : 'criado'} com sucesso`);
       this.router.navigate(['/']);
     }
   }

@@ -16,7 +16,8 @@ export class MaskDirective implements ControlValueAccessor {
   @Input() appMask: string;
 
   private onTouched: any;
-  private onChange = (value: any) => {};
+  private BACK_SPACE = 8;
+  private onChange = (value: any) => { };
 
   writeValue(value: any): void { this.onChange(value); }
   registerOnChange(fn: any): void { this.onChange = fn; }
@@ -27,34 +28,35 @@ export class MaskDirective implements ControlValueAccessor {
     this.writeValue(value);
   }
 
-  @HostListener('keyup', ['$event'])
-  onKeyup($event: any) {
-    let $mask = masks[this.appMask.toUpperCase()];
+  private handleBackSpace($event) {
+    let newValue = $event.target.value;
 
-    if ($event.keyCode !== 8) {
-
-      if (this.appMask.toUpperCase() === 'PHONE') {
-        const length = $event.target.value.length;
-        if (length > 14) { $mask = masks.PHONE_D; }
-
-      }
-
-      const newValue = maskFormat($event.target.value, $mask);
-      this.transform($event, newValue);
-
-    } else {
-      let newValue = $event.target.value;
-
-      if (this.appMask.toUpperCase() === 'PHONE') {
-        const length = $event.target.value.length;
-        if (length > 14) { newValue = maskFormat($event.target.value, masks.PHONE); }
-
-      }
-
-      this.transform($event, newValue);
+    if (this.appMask.toUpperCase() === 'PHONE') {
+      const length = $event.target.value.length;
+      if (length > 14) { newValue = maskFormat($event.target.value, masks.PHONE); }
 
     }
 
+    this.transform($event, newValue);
+  }
+
+  private handleNonBackSpace($event) {
+    let $mask = masks[this.appMask.toUpperCase()];
+
+    if (this.appMask.toUpperCase() === 'PHONE') {
+      const length = $event.target.value.length;
+      if (length > 14) { $mask = masks.PHONE_D; }
+    }
+
+    const newValue = maskFormat($event.target.value, $mask);
+    this.transform($event, newValue);
+
+  }
+
+  @HostListener('keyup', ['$event'])
+  onKeyup($event: any) {
+    const method = $event.keyCode !== this.BACK_SPACE ? 'handleNonBackSpace' : 'handleBackSpace';
+    this[method]($event);
   }
 
   @HostListener('blur', ['$event'])

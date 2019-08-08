@@ -5,13 +5,13 @@
         <div class="card-header border-0" style="position: sticky; top: 0; z-index: 999;">
           <div class="row align-items-center">
             <div class="col">
-              <h3 class="mb-0">{{ 'list.title' | translate }}</h3>
+              <h3 class="mb-0">Clientes</h3>
             </div>
 
             <div class="col text-right">
               <a [routerLink]="['/cadastrar']" class="btn btn-sm btn-slack">
                 <mat-icon matSuffix>person_add</mat-icon> <span style="margin-left: 3px">
-                  {{ 'actions.register' | translate }} </span>
+                  Novo Cliente </span>
               </a>
             </div>
           </div>
@@ -40,9 +40,9 @@
           <table class="table align-items-center table-flush">
             <thead class="thead-light">
               <tr>
-                <th scope="col">{{ 'list.thead.name' | translate }}</th>
-                <th scope="col">{{ 'list.thead.phone' | translate }}</th>
-                <th scope="col">{{ 'list.thead.actions' | translate }}</th>
+                <th scope="col">Nome</th>
+                <th scope="col">Telefone</th>
+                <th scope="col">Ações</th>
               </tr>
             </thead>
             <tbody *ngIf="clientsAfterFiltred">
@@ -71,7 +71,7 @@
 
             <tbody *ngIf="!clientsAfterFiltred || clientsAfterFiltred.length <= 0">
               <tr>
-                <td colspan="4" style="text-align: center; text-transform: uppercase">{{ 'list.fallback' | translate }}</td>
+                <td colspan="4" style="text-align: center; text-transform: uppercase">Nenhum Cliente Registrado</td>
               </tr>
             </tbody>
           </table>
