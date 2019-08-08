@@ -33,5 +33,4 @@ export const maskFormat = (value: any, maskDefault: string): string => {
   value = valueCleaned;
 
   return value;
-
 };

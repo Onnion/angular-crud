@@ -4,7 +4,7 @@ import { masks } from 'src/app/modules/common/consts';
 import { maskFormat } from 'src/app/modules/common/utils/mask.utils';
 
 @Directive({
-  selector: '[mask]',
+  selector: '[appMask]',
   providers: [{
     provide: NG_VALUE_ACCESSOR,
     useExisting: MaskDirective,
@@ -13,7 +13,7 @@ import { maskFormat } from 'src/app/modules/common/utils/mask.utils';
 })
 export class MaskDirective implements ControlValueAccessor {
 
-  @Input('mask') type: string;
+  @Input() appMask: string;
 
   private onTouched: any;
   private onChange = (value: any) => {};
@@ -29,25 +29,25 @@ export class MaskDirective implements ControlValueAccessor {
 
   @HostListener('keyup', ['$event'])
   onKeyup($event: any) {
-    let _mask = masks[this.type.toUpperCase()];
+    let $mask = masks[this.appMask.toUpperCase()];
 
     if ($event.keyCode !== 8) {
 
-      if (this.type.toUpperCase() === 'PHONE') {
+      if (this.appMask.toUpperCase() === 'PHONE') {
         const length = $event.target.value.length;
-        if (length > 14) { _mask = masks['PHONE_D']; }
+        if (length > 14) { $mask = masks.PHONE_D; }
 
       }
 
-      const newValue = maskFormat($event.target.value, _mask);
+      const newValue = maskFormat($event.target.value, $mask);
       this.transform($event, newValue);
 
     } else {
       let newValue = $event.target.value;
 
-      if (this.type.toUpperCase() === 'PHONE') {
+      if (this.appMask.toUpperCase() === 'PHONE') {
         const length = $event.target.value.length;
-        if (length > 14) { newValue = maskFormat($event.target.value, masks['PHONE']); }
+        if (length > 14) { newValue = maskFormat($event.target.value, masks.PHONE); }
 
       }
 
@@ -59,8 +59,8 @@ export class MaskDirective implements ControlValueAccessor {
 
   @HostListener('blur', ['$event'])
   onBlur($event: any) {
-    if ($event.target.value.length > masks[this.type.toUpperCase()].length) {
-      const newValue = $event.target.value.slice(0, masks[this.type.toUpperCase()].length);
+    if ($event.target.value.length > masks[this.appMask.toUpperCase()].length) {
+      const newValue = $event.target.value.slice(0, masks[this.appMask.toUpperCase()].length);
       this.transform($event, newValue);
     }
   }

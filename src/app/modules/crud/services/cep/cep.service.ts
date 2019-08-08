@@ -20,7 +20,7 @@ export class CepService {
     public get(address: Address): Observable<Address> {
         return new Observable((observer) => {
             this.http.get<Address>(`${this.CEP_URL}${cleanUp(address.cep)}/${this.FORMAT}`).subscribe(
-                (address) => observer.next(this.filterAddressFields(address)),
+                ($address) => observer.next(this.filterAddressFields($address)),
                 (error: HttpErrorResponse) => observer.error(error)
             );
         });

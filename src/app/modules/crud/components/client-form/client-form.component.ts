@@ -47,10 +47,17 @@ export class ClientFormComponent implements OnInit {
 
     this.form = this.fb.group({
       name: [this.client ? this.client.name : '', [Validators.required, this.custonValidators.nameFormat]],
-      cpf: [this.client ? this.client.cpf : '', [Validators.required, this.custonValidators.cpfFormat, Validators.pattern('^([0-9]{2}[\.]?[0-9]{3}[\.]?[0-9]{3}[\/]?[0-9]{4}[-]?[0-9]{2})|([0-9]{3}[\.]?[0-9]{3}[\.]?[0-9]{3}[-]?[0-9]{2})$')]],
+      cpf: [this.client ? this.client.cpf : '', [
+        Validators.required,
+        this.custonValidators.cpfFormat,
+        Validators.pattern('^[0-9]{3}[\.][0-9]{3}[\.][0-9]{3}[\-][0-9]{2}$')
+      ]],
       phone: [this.client ? this.client.phone : '', [Validators.required]],
-      birthdate: [this.client ? this.client.birthdate : '', [Validators.required, Validators.pattern('^[0-9]{1,3}$')]],
-      vehicle: ["", [Validators.required]],
+      birthdate: [this.client ? this.client.birthdate : '', [
+        Validators.required,
+        Validators.pattern('^[0-9]{2}[\/][0-9]{2}[\/][0-9]{4}$')
+      ]],
+      vehicle: ['', [Validators.required]],
       address: this.fb.group({
         cep: [this.client ? this.client.address.cep : '', [Validators.required, Validators.pattern('^[0-9]{5}-[0-9]{3}$')]],
         logradouro: [{ value: this.client ? this.client.address.logradouro : '', disabled: true }, [Validators.required]],
@@ -84,7 +91,7 @@ export class ClientFormComponent implements OnInit {
 
   public set(): void {
     if (this.form.valid) {
-      let data = this.createData(this.form.value);
+      const data = this.createData(this.form.value);
 
       this.dataPersistence[this.type === 'edit' ? 'update' : 'create']('client', data);
       // this.notify.show('success', `Cliente ${this.type === 'edit' ? 'atualizado' : 'criado'} com sucesso`);
@@ -101,7 +108,7 @@ export class ClientFormComponent implements OnInit {
     if (this.form.controls.address.get('cep').valid) {
       const { address } = this.form.value;
       this.cepService.get(address as Address).subscribe(
-        (address: Address) => this.setAddress(address),
+        ($address: Address) => this.setAddress($address),
         (error) => console.log(error)
       );
     }

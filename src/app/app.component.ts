@@ -15,10 +15,10 @@ import { TranslateService } from '@ngx-translate/core';
   providers: [TranslateService]
 })
 export class AppComponent {
+
   constructor(public translate: TranslateService) {
     this.translate.addLangs(['en', 'pt']);
     this.translate.setDefaultLang('en');
-    
     const browserLang = translate.getBrowserLang();
     this.translate.use(browserLang.match(/en|pt/) ? browserLang : 'en');
   }
@@ -26,4 +26,5 @@ export class AppComponent {
   public swipeTranslate(lang: string): void {
     this.translate.use(lang);
   }
+
 }

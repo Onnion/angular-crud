@@ -34,7 +34,7 @@
                   <div class="form-group">
                     <mat-form-field appearance="outline">
                       <mat-label>Data de Nascimento</mat-label>
-                      <input mask="BIRTHDATE" formControlName="birthdate" id="age" placeholder="26/03/1996" matInput>
+                      <input appMask="BIRTHDATE" formControlName="birthdate" id="age" placeholder="26/03/1996" matInput>
 
                       <mat-icon matSuffix>date_range</mat-icon>
                     </mat-form-field>
@@ -46,7 +46,7 @@
                   <div class="form-group">
                     <mat-form-field appearance="outline">
                       <mat-label>Telefone</mat-label>
-                      <input mask="PHONE" formControlName="phone" placeholder="(81) 99833-4195" matInput>
+                      <input appMask="PHONE" formControlName="phone" placeholder="(81) 99833-4195" matInput>
 
                       <mat-icon matSuffix>phone</mat-icon>
                     </mat-form-field>
@@ -57,7 +57,7 @@
 
                     <mat-form-field appearance="outline">
                       <mat-label>CPF</mat-label>
-                      <input mask="CPF" formControlName="cpf" placeholder="000.000.000-01" matInput>
+                      <input appMask="CPF" formControlName="cpf" placeholder="000.000.000-01" matInput>
 
                       <mat-icon matSuffix>assignment_ind</mat-icon>
                     </mat-form-field>
@@ -118,7 +118,7 @@
                   <div class="form-group">
                     <mat-form-field appearance="outline">
                       <mat-label>CEP</mat-label>
-                      <input mask="CEP" formControlName="cep" (keyup)="getCep()" placeholder="00000-001" matInput>
+                      <input appMask="CEP" formControlName="cep" (keyup)="getCep()" placeholder="00000-001" matInput>
                       <mat-icon matSuffix>explore</mat-icon>
                     </mat-form-field>
                   </div>

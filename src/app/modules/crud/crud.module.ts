@@ -8,10 +8,11 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { ConfirmComponent } from './components/confirm/confirm.component';
 import { DataPersistenceService } from './services/data-persistence/data-persistence.service';
 import { FormBuilderValidators } from '../common/validators/form-builder/form-builder.validators';
-import { MatButtonModule, MatCardModule, MatIconModule, MatInputModule, MatAutocompleteModule } from "@angular/material";
+import { MatButtonModule, MatCardModule, MatIconModule, MatInputModule, MatAutocompleteModule } from '@angular/material';
 import { TranslateModule } from '@ngx-translate/core';
 import { CepService } from './services/cep/cep.service';
 import { MaskDirective } from './directives/mask/mask.directive';
+import { ModalDirective } from './directives/modal/modal.directive';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { MaskDirective } from './directives/mask/mask.directive';
     ClientFormComponent,
     ClientViewComponent,
     ConfirmComponent,
-    MaskDirective
+    MaskDirective,
+    ModalDirective
   ],
   providers: [DataPersistenceService, FormBuilderValidators, CepService],
   imports: [
